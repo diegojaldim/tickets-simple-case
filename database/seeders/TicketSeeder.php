@@ -30,9 +30,14 @@ class TicketSeeder extends Seeder
         $content = json_decode($file);
 
         foreach ($content as $item) {
+            if (!isset($item->TicketID)) {
+                continue;
+            }
+
             $this->service->set($item->TicketID, $item);
         }
 
+        echo 'OK!' . PHP_EOL;
     }
 
 }

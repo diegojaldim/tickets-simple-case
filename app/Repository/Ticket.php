@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Adapter\TicketRedisAdapter;
+use App\Entities\TicketCollection;
 use App\Models\Ticket as TicketModel;
 
 class Ticket
@@ -11,16 +12,16 @@ class Ticket
     /**
      * @var TicketModel
      */
-    protected $ticket;
+    protected $ticketModel;
 
     /**
      * Ticket constructor.
-     * @param TicketModel $ticket
+     * @param TicketModel $ticketModel
      */
-    public function __construct(TicketModel $ticket)
+    public function __construct(TicketModel $ticketModel)
     {
-        $this->ticket = $ticket;
-        $this->ticket->setAdapter(
+        $this->ticketModel = $ticketModel;
+        $this->ticketModel->setAdapter(
             new TicketRedisAdapter()
         );
     }
@@ -31,15 +32,15 @@ class Ticket
      */
     public function set($key, $value)
     {
-        $this->ticket->set($key, $value);
+        $this->ticketModel->set($key, $value);
     }
 
     /**
-     * @return mixed
+     * @return TicketCollection
      */
-    public function getAllData()
+    public function getAllData(): TicketCollection
     {
-        return $this->ticket->getAllData();
+        return $this->ticketModel->getAllData();
     }
 
 }

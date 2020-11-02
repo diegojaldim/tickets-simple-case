@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entities\TicketCollection;
 use App\Repository\Ticket as TicketRepository;
 
 
@@ -23,9 +24,9 @@ class Ticket
     }
 
     /**
-     * @return mixed
+     * @return TicketCollection
      */
-    public function getAllData()
+    public function getAllData(): TicketCollection
     {
         return $this->repository->getAllData();
     }

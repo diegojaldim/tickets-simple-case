@@ -2,6 +2,7 @@
 
 namespace App\Adapter;
 
+use App\Entities\TicketCollection;
 
 interface TicketAdapterInterface
 {
@@ -10,6 +11,6 @@ interface TicketAdapterInterface
 
     public function set($key, $value);
 
-    public function getAllData();
+    public function getAllData(): TicketCollection;
 
 }

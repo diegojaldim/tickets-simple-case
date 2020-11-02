@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Adapter\TicketAdapterInterface;
+use App\Entities\TicketCollection;
 use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
@@ -48,9 +49,9 @@ class Ticket extends Model
     }
 
     /**
-     * @return mixed
+     * @return TicketCollection
      */
-    public function getAllData()
+    public function getAllData(): TicketCollection
     {
         return $this->adapter->getAllData();
     }
