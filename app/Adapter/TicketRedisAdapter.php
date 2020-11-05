@@ -53,7 +53,7 @@ class TicketRedisAdapter implements TicketAdapterInterface
                 $id = substr($key, strlen(env('REDIS_PREFIX')));
             }
 
-            if (!in_array($id, $ids)) {
+            if (!empty($ids) && !in_array($id, $ids)) {
                 continue;
             }
 

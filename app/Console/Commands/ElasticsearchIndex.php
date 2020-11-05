@@ -6,6 +6,7 @@ use App\Search\TicketSearch;
 use App\Service\Ticket;
 use Illuminate\Console\Command;
 use App\Service\Ticket as TicketService;
+use App\Helpers\EvaluateTicketPriority;
 
 class ElasticsearchIndex extends Command
 {
@@ -75,7 +76,9 @@ class ElasticsearchIndex extends Command
                 $dateUpdate->format(TicketSearch::DATE_FORMAT)
             );
 
-            $this->ticketSearch->setPriority($i);
+            $priority = EvaluateTicketPriority::evaluate($ticketItem);
+
+            $this->ticketSearch->setPriority($priority);
 
             $this->ticketSearch->indexDocument();
             $i++;
