@@ -37,10 +37,20 @@ class Ticket
 
     /**
      * @return TicketCollection
+     * @param array $ids
      */
-    public function getAllData(): TicketCollection
+    public function getAllData($ids = []): TicketCollection
     {
-        return $this->ticketModel->getAllData();
+        return $this->ticketModel->getAllData($ids);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        return $this->ticketModel->getById($id);
     }
 
 }

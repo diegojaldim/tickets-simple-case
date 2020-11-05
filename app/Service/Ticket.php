@@ -25,10 +25,11 @@ class Ticket
 
     /**
      * @return TicketCollection
+     * @param array $ids
      */
-    public function getAllData(): TicketCollection
+    public function getAllData($ids = []): TicketCollection
     {
-        return $this->repository->getAllData();
+        return $this->repository->getAllData($ids);
     }
 
     /**
@@ -38,6 +39,15 @@ class Ticket
     public function set($key, $value)
     {
         $this->repository->set($key, $value);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        return $this->repository->getById($id);
     }
 
 }

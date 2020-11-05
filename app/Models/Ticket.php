@@ -50,10 +50,20 @@ class Ticket extends Model
 
     /**
      * @return TicketCollection
+     * @param array $ids
      */
-    public function getAllData(): TicketCollection
+    public function getAllData($ids = []): TicketCollection
     {
-        return $this->adapter->getAllData();
+        return $this->adapter->getAllData($ids);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        return $this->adapter->get($id);
     }
 
 }

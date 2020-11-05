@@ -17,7 +17,12 @@ class TicketRedisAdapter implements TicketAdapterInterface
      */
     public function get($key)
     {
-        $id = substr($key, strlen(env('REDIS_PREFIX')));
+        $id = $key;
+
+        if (!intval($id)) {
+            $id = substr($key, strlen(env('REDIS_PREFIX')));
+        }
+
         $data = Redis::get($id);
         return unserialize($data);
     }
@@ -33,13 +38,25 @@ class TicketRedisAdapter implements TicketAdapterInterface
 
     /**
      * @return TicketCollection
+     * @param array $ids
      */
-    public function getAllData(): TicketCollection
+    public function getAllData($ids = []): TicketCollection
     {
         $collection = new TicketCollection();
         $keys = Redis::keys('*');
 
         foreach ($keys as $key) {
+
+            $id = $key;
+
+            if (!intval($id)) {
+                $id = substr($key, strlen(env('REDIS_PREFIX')));
+            }
+
+            if (!in_array($id, $ids)) {
+                continue;
+            }
+
             $data = $this->get($key);
 
             $ticket = new TicketEntity();

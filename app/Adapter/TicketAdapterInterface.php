@@ -11,6 +11,6 @@ interface TicketAdapterInterface
 
     public function set($key, $value);
 
-    public function getAllData(): TicketCollection;
+    public function getAllData($ids = []): TicketCollection;
 
 }
