@@ -5,8 +5,10 @@ namespace App\Search;
 use App\Entities\TicketCollection;
 use App\Service\Ticket as TicketService;
 
-class TicketSearch extends AbstractSearch
+class TicketSearch extends AbstractSearch implements PaginationInterface
 {
+
+    use Pagination;
 
     /**
      * @const string
@@ -17,6 +19,11 @@ class TicketSearch extends AbstractSearch
      * @const string
      */
     const DATE_FORMAT = 'Y-m-d\TH:i:s\Z';
+
+    /**
+     * @const string
+     */
+    const SORT_DEFAULT = 'Priority:desc';
 
     /**
      * @var string
@@ -57,7 +64,7 @@ class TicketSearch extends AbstractSearch
             'body' => [
                 'DateCreate' => $this->DateCreate,
                 'DateUpdate' => $this->DateUpdate,
-                'Priority' => $this->Priority,
+                'Priority' => (int) $this->Priority,
             ]
         ];
 

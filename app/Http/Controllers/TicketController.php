@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\TicketCollection;
 use App\Search\TicketSearch;
 use App\Service\Ticket as TicketService;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -31,17 +32,21 @@ class TicketController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return TicketCollection
      */
-    public function getAllData()
+    public function getAllData(Request $request)
     {
+        $sort = $request->get('sort') ?? TicketSearch::SORT_DEFAULT;
+        $page = $request->get('page') ?? 1;
+
         $params = [
             'body' => [
-                "from" => 0,
-                "size" => 10,
+                'from' => TicketSearch::page($page),
+                'size' => TicketSearch::SIZE,
             ],
             'sort' => [
-                'DateCreate:asc'
+                $sort
             ]
         ];
 
