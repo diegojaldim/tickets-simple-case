@@ -21,7 +21,6 @@ Rodar o comando para popular o Redis:
 
 ```
 php artisan seed
-
 ``` 
 
 Depois que o Redis estiver populado, rodar o comando para indexar os documentos no Elasticsearch:
